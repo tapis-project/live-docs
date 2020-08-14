@@ -68,39 +68,45 @@
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
     <script>
       // $(document).foundation();
+      // Default branch is master
+      // TODO: change to branch prod when all are available
+      var branch_name = 'master'
+      var urlParms = new URLSearchParams(location.search)
+      var has_branch = urlParms.has('branch')
+      if (has_branch) branch_name = urlParms.get('branch')
       // list of APIS
       var apis = [
         {
           name: 'Tenants',
-          url: 'https://raw.githubusercontent.com/tapis-project/tenants-api/master/service/resources/openapi_v3.yml'
+          url: 'https://raw.githubusercontent.com/tapis-project/tenants-api/' + branch_name + '/service/resources/openapi_v3.yml'
         },
         {
           name: 'Tokens',
-          url: 'https://raw.githubusercontent.com/tapis-project/tokens-api/master/service/resources/openapi_v3.yml'
+          url: 'https://raw.githubusercontent.com/tapis-project/tokens-api/' + branch_name + '/service/resources/openapi_v3.yml'
         },
         {
           name: 'Authenticator',
-          url: 'https://raw.githubusercontent.com/tapis-project/authenticator/master/service/resources/openapi_v3.yml'
+          url: 'https://raw.githubusercontent.com/tapis-project/authenticator/' + branch_name + '/service/resources/openapi_v3.yml'
         },
         {
           name: 'Files',
-          url: 'https://raw.githubusercontent.com/tapis-project/tapis-files/master/api/src/main/resources/openapi.yaml'
+          url: 'https://raw.githubusercontent.com/tapis-project/tapis-files/' + branch_name + '/api/src/main/resources/openapi.yaml'
         },
         {
           name: 'SK',
-          url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/master/security-client/src/main/resources/SKAuthorizationAPI.yaml'
+          url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/security-client/src/main/resources/SKAuthorizationAPI.yaml'
         },
         {
           name: 'Meta',
-          url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/master/meta-client/src/main/resources/metav3-openapi.yaml'
+          url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/meta-client/src/main/resources/metav3-openapi.yaml'
         },
         {
           name: 'Streams',
-          url: 'https://raw.githubusercontent.com/tapis-project/streams-api/master/service/resources/openapi_v3.yml'
+          url: 'https://raw.githubusercontent.com/tapis-project/streams-api/' + branch_name + '/service/resources/openapi_v3.yml'
         },
         {
           name: 'Systems',
-          url: 'https://raw.githubusercontent.com/tapis-project/tapis-java/dev/tapis-systemsapi/src/main/resources/SystemsAPI.yaml'
+          url: 'https://raw.githubusercontent.com/tapis-project/tapis-java/' + branch_name + '/tapis-systemsapi/src/main/resources/SystemsAPI.yaml'
         }
       ];
 
