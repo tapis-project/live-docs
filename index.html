@@ -70,10 +70,8 @@
       // $(document).foundation();
       // Default branch is master
       // TODO: change to branch prod when all are available
-      var branch_name = 'master'
       var urlParms = new URLSearchParams(location.search)
-      var has_branch = urlParms.has('branch')
-      if (has_branch) branch_name = urlParms.get('branch')
+      var branch_name = urlParms.has('branch') ? urlParms.get('branch') : 'master'
       // list of APIS
       var apis = [
         {
