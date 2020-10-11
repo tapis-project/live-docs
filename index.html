@@ -68,8 +68,7 @@
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
     <script>
       // $(document).foundation();
-      // Default branch is master
-      // TODO: change to branch prod when all are available
+      // Default branch is prod
       var urlParms = new URLSearchParams(location.search)
       var branch_name = urlParms.has('branch') ? urlParms.get('branch') : 'prod'
       // list of APIS
@@ -105,6 +104,10 @@
         {
           name: 'Systems',
           url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/systems-client/SystemsAPI.yaml'
+        },
+        {
+          name: 'Apps',
+          url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/apps-client/AppsAPI.yaml'
         },
         {
           name: 'Actors',
