@@ -81,7 +81,7 @@ $(document).ready(function($) {
         Redoc.init(url);
         var queryParams = new URLSearchParams(window.location.search);
         queryParams.set("service", serviceName);
-        history.pushState(null, null, "?"+queryParams.toString());
+        history.replaceState(null, null, "?"+queryParams.toString());
     }
 
     // dynamically building navigation items
