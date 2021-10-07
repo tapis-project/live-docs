@@ -60,6 +60,21 @@ var apis = [
 
 
 function init() {
+
+    let service = urlParms.get("service");
+    if (service) {
+        apis.forEach((d) => {
+            if (d.name.toLowerCase() == service.toLowerCase()) {
+                Redoc.init(d.url);
+            }
+        });
+    } else {
+        // initially render first API
+        Redoc.init(apis[0].url);
+    }
+}
+$(document).ready(function($) {
+
     function onClick() {
         var url = this.getAttribute('data-link');
         let serviceName = this.getAttribute('service');
@@ -80,20 +95,6 @@ function init() {
         $list.appendChild($listitem);
     });
 
-    let service = urlParms.get("service");
-    if (service) {
-        apis.forEach((d) => {
-            if (d.name.toLowerCase() == service.toLowerCase()) {
-                Redoc.init(d.url);
-            }
-        });
-    } else {
-        // initially render first API
-        Redoc.init(apis[0].url);
-    }
-}
-$(document).ready(function($) {
-    console.log("init");
     init();
 
     $(window).on('popstate', function() {
