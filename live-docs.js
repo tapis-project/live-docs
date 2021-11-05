@@ -5,12 +5,12 @@ let branch_name = urlParms.has('branch') ? urlParms.get('branch') : 'prod';
 // list of APIS
 var apis = [
     {
-        name: 'Tenants',
-        url: 'https://raw.githubusercontent.com/tapis-project/tenants-api/' + branch_name + '/service/resources/openapi_v3.yml'
+        name: 'Actors',
+        url: 'https://raw.githubusercontent.com/TACC/abaco/dev-v3/docs/specs/openapi_v3.yml'
     },
     {
-        name: 'Tokens',
-        url: 'https://raw.githubusercontent.com/tapis-project/tokens-api/' + branch_name + '/service/resources/openapi_v3.yml'
+        name: 'Apps',
+        url: 'https://raw.githubusercontent.com/tapis-project/openapi-apps/' + branch_name + '/AppsAPI.yaml'
     },
     {
         name: 'Authenticator',
@@ -21,16 +21,24 @@ var apis = [
         url: 'https://raw.githubusercontent.com/tapis-project/tapis-files/' + branch_name + '/api/src/main/resources/openapi.yaml'
     },
     {
-        name: 'SK',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/security-client/src/main/resources/SKAuthorizationAPI.yaml'
+        name: 'Jobs',
+        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/jobs-client/src/main/resources/JobsAPI.yaml'
     },
     {
         name: 'Meta',
         url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/meta-client/src/main/resources/metav3-openapi.yaml'
     },
     {
+        name: "Notifications",
+        url: 'https://raw.githubusercontent.com/tapis-project/notifications/' +  branch_name + '/api/src/main/resources/openapi.yaml'
+    },
+    {
         name: 'PgREST',
         url: 'https://raw.githubusercontent.com/TACC/paas/' + branch_name + '/pgrest/resources/openapi_v3.yml'
+    },
+    {
+        name: 'SK',
+        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/security-client/src/main/resources/SKAuthorizationAPI.yaml'
     },
     {
         name: 'Streams',
@@ -41,23 +49,14 @@ var apis = [
         url: 'https://raw.githubusercontent.com/tapis-project/openapi-systems/' + branch_name + '/SystemsAPI.yaml'
     },
     {
-        name: 'Apps',
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-apps/' + branch_name + '/AppsAPI.yaml'
+        name: 'Tenants',
+        url: 'https://raw.githubusercontent.com/tapis-project/tenants-api/' + branch_name + '/service/resources/openapi_v3.yml'
     },
     {
-        name: 'Jobs',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/jobs-client/src/main/resources/JobsAPI.yaml'
-    },
-    {
-        name: 'Actors',
-        url: 'https://raw.githubusercontent.com/TACC/abaco/dev-v3/docs/specs/openapi_v3.yml'
-    },
-    {
-        name: "Notifications",
-        url: 'https://raw.githubusercontent.com/tapis-project/notifications/' +  branch_name + '/api/src/main/resources/openapi.yaml'
+        name: 'Tokens',
+        url: 'https://raw.githubusercontent.com/tapis-project/tokens-api/' + branch_name + '/service/resources/openapi_v3.yml'
     }
 ];
-
 
 function init() {
 
@@ -104,4 +103,3 @@ $(document).ready(function($) {
         init();
     });
 })
-
