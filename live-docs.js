@@ -18,7 +18,7 @@ var apis = [
     },
     {
         name: 'Files',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-files/' + branch_name + '/api/src/main/resources/openapi.yaml'
+        url: 'https://raw.githubusercontent.com/tapis-project/openapi-files/' + branch_name + '/FilesAPI.yaml'
     },
     {
         name: 'Jobs',
