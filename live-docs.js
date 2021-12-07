@@ -30,7 +30,7 @@ var apis = [
     },
     {
         name: "Notifications",
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-notifications/' + branch_name + '/NotificationAPI.yaml'
+        url: 'https://raw.githubusercontent.com/tapis-project/openapi-notifications/' + branch_name + '/NotificationsAPI.yaml'
     },
     {
         name: 'PgREST',
