@@ -21,6 +21,10 @@ var apis = [
         url: 'https://raw.githubusercontent.com/tapis-project/openapi-files/' + branch_name + '/FilesAPI.yaml'
     },
     {
+        name: 'GlobusProxy',
+        url: 'https://raw.githubusercontent.com/tapis-project/globus-proxy/' + branch_name + '/service/resources/openapi_v3.yml'
+    },
+    {
         name: 'Jobs',
         url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/jobs-client/src/main/resources/JobsAPI.yaml'
     },
