@@ -62,7 +62,7 @@ var apis = [
     },
     {
         name: 'Workflows',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-workflows/' + branch_name + '/src/components/api/src/specs/WorkflowsAPI.yaml'
+        url: 'https://raw.githubusercontent.com/tapis-project/tapis-workflows/' + branch_name + '/src/components/api/specs/WorkflowsAPI.yaml'
     }
 ];
 
