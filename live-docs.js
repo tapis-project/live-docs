@@ -59,6 +59,10 @@ var apis = [
     {
         name: 'Tokens',
         url: 'https://raw.githubusercontent.com/tapis-project/tokens-api/' + branch_name + '/service/resources/openapi_v3.yml'
+    },
+    {
+        name: 'Workflows',
+        url: 'https://raw.githubusercontent.com/tapis-project/tapis-workflows/' + branch_name + '/src/components/api/src/specs/WorkflowsAPI.yaml'
     }
 ];
 
