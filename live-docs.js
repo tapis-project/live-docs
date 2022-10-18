@@ -41,6 +41,10 @@ var apis = [
         url: 'https://raw.githubusercontent.com/TACC/paas/' + branch_name + '/pgrest/resources/openapi_v3.yml'
     },
     {
+        name: 'Pods',
+        url: 'https://raw.githubusercontent.com/tapis-project/pods_service/main/docs/openapi_v3-pods.yml'
+    },
+    {
         name: 'SK',
         url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/security-client/src/main/resources/SKAuthorizationAPI.yaml'
     },
