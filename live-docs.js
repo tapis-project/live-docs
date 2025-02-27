@@ -46,7 +46,7 @@ var apis = [
     },
     {
         name: 'SK',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/security-client/src/main/resources/SKAuthorizationAPI.yaml'
+        url: 'https://raw.githubusercontent.com/tapis-project/openapi-security/' + branch_name + '/SkAPI.yaml'
     },
     {
         name: 'Streams',
