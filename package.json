@@ -10,6 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "live-server": "^1.2.1",
-    "url-parse": "^1.5.10"
+    "url-parse": "^1.5.10",
+    "minimist": "^1.2.5",
+    "braces": "^3.0.2",
+    "tar": "^7.4.3",
+    "minimatch": "^9.0.0"
   }
 }

@@ -84,18 +84,29 @@ function init() {
         Redoc.init(apis[0].url);
     }
 }
-$(document).ready(function($) {
+$(document).ready(function ($) {
 
     function onClick() {
+        console.log("top of onclick");
         var url = this.getAttribute('data-link');
         let serviceName = this.getAttribute('service');
         Redoc.init(url);
         var queryParams = new URLSearchParams(window.location.search);
         queryParams.set("service", serviceName);
-        // history.replaceState(null, null, "?"+queryParams.toString());
-        // history.pushState(null, null, "?"+queryParams.toString());
-        window.location.search = queryParams.toString();
+        let hashFragment = window.location.hash;
+        // Consolidated history management
+        updateHistory(queryParams, hashFragment);
+    }
 
+    function updateHistory(queryParams, hashFragment) {
+        // Construct the new state
+        let newState = "?" + queryParams.toString() + hashFragment;
+
+        // Push the new state to history
+        history.pushState(null, null, newState);
+
+        //console.log("Updated history state:", newState);
+        //console.log("Current history state:", history.state);
     }
 
     // dynamically building navigation items
@@ -109,9 +120,76 @@ $(document).ready(function($) {
         $list.appendChild($listitem);
     });
 
-    init();
-
-    $(window).on('popstate', function() {
+    var queryParams = new URLSearchParams(window.location.search);
+    console.log("Query parameters on page load:", Object.fromEntries(queryParams.entries()));
+    init(queryParams);
+    
+    $(window).on('popstate', function () {
         init();
     });
 })
+
+
+// This block is an attempt at getting back and forward buttons working between different api pages
+// each redoc page manages state. Moving between them causes issues with the code below, but might
+// be useful for future debugging of the issue.
+// History is deprioritized currently to get rid of error messages to user.
+
+        // console.log("State change detected");
+
+        // // Get parameters before the popstate event
+        // var beforeService = window.location.search;
+        // var beforeHash = window.location.hash;
+
+        // // Get current parameters after the popstate event
+        // var afterService = this.location.search;
+        // var afterHash = this.location.hash;
+
+        // console.log("Service at popstate:", beforeService, " --> ", afterService);
+        // console.log("Hash at popstate:", beforeHash, " --> ", afterHash);
+
+        // if (beforeService !== afterService || beforeHash !== afterHash) {
+        //     console.log("Service or hash changed");
+        //     Redoc.init(afterService + afterHash); // Initialize with the new query parameters and hash
+        // }
+
+
+    // $(window).on('popstate', function(event) {
+    //     console.log("state change detected");
+    //     var url = this.location.search + this.location.hash; // Include hash fragment
+    //     console.log("url: " + url);
+
+    //     var queryParams = new URLSearchParams(this.location.search);
+    //     console.log("Query parameters after back button:", Object.fromEntries(queryParams.entries()));
+
+    //     let serviceName = queryParams.get("service");
+    //     console.log("serviceName: " + serviceName);
+
+    //     const matchingApi = apis.find(d => d.name.toLowerCase() === serviceName?.toLowerCase());
+
+    //     // Only initialize Redoc if a matching API is found and it's different from current one
+    //     if (matchingApi) {
+    //         // Get the currently displayed API name (from document or a global variable)
+    //         const currentApiName = document.querySelector('#links_container li.active')?.getAttribute('service');
+    //         //const currentApiName = this.location.search("service");
+
+    //         // Only reinitialize if the API is changing
+    //         if (!currentApiName || currentApiName.toLowerCase() !== matchingApi.name.toLowerCase()) {
+    //             console.log("Changing to service: " + matchingApi.name + " from " + currentApiName);
+    //             Redoc.init(matchingApi.url + this.location.hash); // Pass hash fragment to Redoc
+
+    //             // Update active state in navigation
+    //             const listItems = document.querySelectorAll('#links_container li');
+    //             listItems.forEach(item => {
+    //                 item.classList.remove('active');
+    //                 if (item.getAttribute('service').toLowerCase() === matchingApi.name.toLowerCase()) {
+    //                     item.classList.add('active');
+    //                 }
+    //             });
+    //         } else {
+    //             console.log("Same service requested, no need to reinitialize");
+    //         }
+    //     } else {
+    //         console.log("Service not found: " + serviceName);
+    //     }
+    //});
