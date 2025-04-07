@@ -125,7 +125,24 @@ $(document).ready(function ($) {
     init(queryParams);
     
     $(window).on('popstate', function () {
-        init();
+        console.log("State change detected");
+
+        // Get parameters before the popstate event
+        var beforeService = window.location.search;
+        var beforeHash = window.location.hash;
+
+        // Get current parameters after the popstate event
+        var afterService = this.location.search;
+        var afterHash = this.location.hash;
+
+        //console.log("Service at popstate:", beforeService, " --> ", afterService);
+        //console.log("Hash at popstate:", beforeHash, " --> ", afterHash);
+
+        if (beforeService !== afterService || beforeHash !== afterHash) {
+            // This history logic helps a bit, but not great.
+            console.log("Service or hash changed");
+            Redoc.init(afterService + afterHash); // Initialize with the new query parameters and hash
+        }
     });
 })
 
@@ -135,23 +152,6 @@ $(document).ready(function ($) {
 // be useful for future debugging of the issue.
 // History is deprioritized currently to get rid of error messages to user.
 
-        // console.log("State change detected");
-
-        // // Get parameters before the popstate event
-        // var beforeService = window.location.search;
-        // var beforeHash = window.location.hash;
-
-        // // Get current parameters after the popstate event
-        // var afterService = this.location.search;
-        // var afterHash = this.location.hash;
-
-        // console.log("Service at popstate:", beforeService, " --> ", afterService);
-        // console.log("Hash at popstate:", beforeHash, " --> ", afterHash);
-
-        // if (beforeService !== afterService || beforeHash !== afterHash) {
-        //     console.log("Service or hash changed");
-        //     Redoc.init(afterService + afterHash); // Initialize with the new query parameters and hash
-        // }
 
 
     // $(window).on('popstate', function(event) {

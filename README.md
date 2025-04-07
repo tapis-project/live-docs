@@ -7,6 +7,6 @@ After that you can serve the built files through a proxy or a simple python serv
 ```bash
 python -m http.server 9999
 ```
-Once running, point a browser to localhost:9999 to view the local built live-docs page.
+Once running, point a browser to `localhost:9999` to view the local built live-docs page.
 
 To iterate, change files, rebuild, and relaunch the server.
