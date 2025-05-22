@@ -26,7 +26,7 @@ var apis = [
     },
     {
         name: 'Jobs',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/jobs-client/src/main/resources/JobsAPI.yaml'
+        url: 'https://raw.githubusercontent.com/tapis-project/openapi-jobs/' + branch_name + '/JobsAPI.yaml'
     },
     {
         name: 'Meta',
