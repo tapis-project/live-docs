@@ -42,7 +42,7 @@ var apis = [
     },
     {
         name: 'Pods',
-        url: 'https://raw.githubusercontent.com/tapis-project/pods_service/main/docs/openapi_v3-pods.yml'
+        url: 'https://raw.githubusercontent.com/tapis-project/pods_service/' + branch_name + '/docs/openapi_v3-pods.yml'
     },
     {
         name: 'SK',
