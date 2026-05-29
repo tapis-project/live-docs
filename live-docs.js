@@ -67,8 +67,17 @@ var apis = [
     {
         name: 'Workflows',
         url: 'https://raw.githubusercontent.com/tapis-project/tapis-workflows/' + branch_name + '/src/api/specs/WorkflowsAPI.yaml'
-    }
+    },
+    {
+        name: 'MLHub Models',
+        url: 'https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/' + branch_name + '/services/models/spec/v1/openapi.json',
+    },
+    {
+        name: 'MLHub Deployments',
+        url: 'https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/' + branch_name + '/services/deployments/spec/v1/openapi.json',
+    },
 ];
+
 
 function init() {
 
