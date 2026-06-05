@@ -3,9 +3,7 @@
 const BRANCH_TEMPLATE_STR = "{{ branch }}"
 
 let urlParams = new URLSearchParams(location.search);
-let branchName = urlParams.get('branch');
-
-console.log({urlParams})
+let currentBranch = urlParams.get('branch');
 
 class Api {
     constructor(name, urlTemplate, defaultBranch) {
@@ -15,7 +13,7 @@ class Api {
     }
 
     getUrlForCurrentBranch = () => {
-        return this.urlTemplate.replace(BRANCH_TEMPLATE_STR, branchName || this.defaultBranch)
+        return this.urlTemplate.replace(BRANCH_TEMPLATE_STR, currentBranch || this.defaultBranch)
     }
 }
 
@@ -115,10 +113,8 @@ var apis = [
 
 
 function init() {
-    console.log("Initializing")
     let service = urlParams.get("service");
-    console.log({service})
-    if (service) {
+    if (!!service) {
         apis.forEach((api) => {
             if (api.name.toLowerCase() == service.toLowerCase()) {
                 console.log(`${api.getUrlForCurrentBranch()}`)
@@ -128,14 +124,13 @@ function init() {
 
         return 
     }
-    
+
     // initially render first API
     Redoc.init(apis[0].getUrlForCurrentBranch());
 }
-$(document).ready(function ($) {
 
+$(document).ready(function ($) {
     function onClick() {
-        console.log("top of onclick");
         var url = this.getAttribute('data-link');
         let serviceName = this.getAttribute('service');
         Redoc.init(url);
@@ -169,12 +164,10 @@ $(document).ready(function ($) {
     });
 
     var queryParams = new URLSearchParams(window.location.search);
-    console.log("Query parameters on page load:", Object.fromEntries(queryParams.entries()));
+    
     init(queryParams);
     
     $(window).on('popstate', function () {
-        console.log("State change detected");
-
         // Get parameters before the popstate event
         var beforeService = window.location.search;
         var beforeHash = window.location.hash;
@@ -188,7 +181,6 @@ $(document).ready(function ($) {
 
         if (beforeService !== afterService || beforeHash !== afterHash) {
             // This history logic helps a bit, but not great.
-            console.log("Service or hash changed");
             Redoc.init(afterService + afterHash); // Initialize with the new query parameters and hash
         }
     });
