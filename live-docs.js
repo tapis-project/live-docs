@@ -2,6 +2,8 @@
 
 const BRANCH_TEMPLATE_STR = "{{ branch }}"
 
+let urlParams = new URLSearchParams(location.search);
+
 class Api {
     constructor(name, urlTemplate, defaultBranch) {
         this.name = name;
@@ -10,8 +12,7 @@ class Api {
     }
 
     getUrlForCurrentBranch = () => {
-        let urlParms = new URLSearchParams(location.search);
-        let branch_name = urlParms.has('branch') ? urlParms.get('branch') : this.defaultBranch;
+        let branch_name = urlParams.has('branch') ? urlParams.get('branch') : this.defaultBranch;
         this.urlTemplate.replace(BRANCH_TEMPLATE_STR, branch_name)
     }
 }
@@ -112,7 +113,7 @@ var apis = [
 
 
 function init() {
-    let service = urlParms.get("service");
+    let service = urlParams.get("service");
     if (service) {
         apis.forEach((api) => {
             if (api.name.toLowerCase() == service.toLowerCase()) {
