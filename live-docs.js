@@ -1,97 +1,130 @@
 // $(document).foundation();
-// Default branch is prod
-let urlParms = new URLSearchParams(location.search);
-let branch_name = urlParms.has('branch') ? urlParms.get('branch') : 'prod';
+
+const BRANCH_TEMPLATE_STR = "{{ branch }}"
+
+class Api {
+    constructor(name, urlTemplate, defaultBranch) {
+        this.name = name;
+        this.urlTemplate = urlTemplate;
+        this.defaultBranch = defaultBranch;
+    }
+
+    getUrlForCurrentBranch = () => {
+        let urlParms = new URLSearchParams(location.search);
+        let branch_name = urlParms.has('branch') ? urlParms.get('branch') : this.defaultBranch;
+        this.urlTemplate.replace(BRANCH_TEMPLATE_STR, branch_name)
+    }
+}
+
 // list of APIS
 var apis = [
     {
         name: 'Actors',
-        url: 'https://raw.githubusercontent.com/TACC/abaco/dev-v3/docs/specs/openapi_v3.yml'
+        urlTemplate: 'https://raw.githubusercontent.com/TACC/abaco/dev-v3/docs/specs/openapi_v3.yml',
+        defaultBranch: "prod",
     },
     {
         name: 'Apps',
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-apps/' + branch_name + '/AppsAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/openapi-apps/${BRANCH_TEMPLATE_STR}/AppsAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Authenticator',
-        url: 'https://raw.githubusercontent.com/tapis-project/authenticator/' + branch_name + '/service/resources/openapi_v3.yml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/authenticator/${BRANCH_TEMPLATE_STR}/service/resources/openapi_v3.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Files',
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-files/' + branch_name + '/FilesAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/openapi-files/${BRANCH_TEMPLATE_STR}/FilesAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'GlobusProxy',
-        url: 'https://raw.githubusercontent.com/tapis-project/globus-proxy/' + branch_name + '/service/resources/openapi_v3.yml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/globus-proxy/${BRANCH_TEMPLATE_STR}/service/resources/openapi_v3.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Jobs',
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-jobs/' + branch_name + '/JobsAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/openapi-jobs/${BRANCH_TEMPLATE_STR}/JobsAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Meta',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-client-java/' + branch_name + '/meta-client/src/main/resources/metav3-openapi.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/tapis-client-java/${BRANCH_TEMPLATE_STR}/meta-client/src/main/resources/metav3-openapi.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: "Notifications",
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-notifications/' + branch_name + '/NotificationsAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/openapi-notifications/${BRANCH_TEMPLATE_STR}/NotificationsAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'PgREST',
-        url: 'https://raw.githubusercontent.com/TACC/paas/' + branch_name + '/pgrest/resources/openapi_v3.yml'
+        urlTemplate: `https://raw.githubusercontent.com/TACC/paas/${BRANCH_TEMPLATE_STR}/pgrest/resources/openapi_v3.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Pods',
-        url: 'https://raw.githubusercontent.com/tapis-project/pods_service/' + branch_name + '/docs/openapi_v3-pods.yml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/pods_service/${BRANCH_TEMPLATE_STR}/docs/openapi_v3-pods.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'SK',
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-security/' + branch_name + '/SkAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/openapi-security/${BRANCH_TEMPLATE_STR}/SkAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Streams',
-        url: 'https://raw.githubusercontent.com/tapis-project/streams-api/' + branch_name + '/service/resources/openapi_v3.yml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/streams-api/${BRANCH_TEMPLATE_STR}/service/resources/openapi_v3.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Systems',
-        url: 'https://raw.githubusercontent.com/tapis-project/openapi-systems/' + branch_name + '/SystemsAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/openapi-systems/${BRANCH_TEMPLATE_STR}/SystemsAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Tenants',
-        url: 'https://raw.githubusercontent.com/tapis-project/tenants-api/' + branch_name + '/service/resources/openapi_v3.yml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/tenants-api/${BRANCH_TEMPLATE_STR}/service/resources/openapi_v3.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Tokens',
-        url: 'https://raw.githubusercontent.com/tapis-project/tokens-api/' + branch_name + '/service/resources/openapi_v3.yml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/tokens-api/${BRANCH_TEMPLATE_STR}/service/resources/openapi_v3.yml`,
+        defaultBranch: "prod",
     },
     {
         name: 'Workflows',
-        url: 'https://raw.githubusercontent.com/tapis-project/tapis-workflows/' + branch_name + '/src/api/specs/WorkflowsAPI.yaml'
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/tapis-workflows/${BRANCH_TEMPLATE_STR}/src/api/specs/WorkflowsAPI.yaml`,
+        defaultBranch: "prod",
     },
     {
         name: 'MLHub Models',
-        url: 'https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/' + branch_name + '/services/models/spec/v1/openapi.json',
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/${BRANCH_TEMPLATE_STR}/services/models/spec/v1/openapi.json`,
+        defaultBranch: "main",
     },
     {
         name: 'MLHub Deployments',
-        url: 'https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/' + branch_name + '/services/deployments/spec/v1/openapi.json',
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/${BRANCH_TEMPLATE_STR}/services/deployments/spec/v1/openapi.json`,
+        defaultBranch: "main"
     },
-];
+].map((api) => Api(api.name, api.urlTemplate, api.defaultBranch));
 
 
 function init() {
-
     let service = urlParms.get("service");
     if (service) {
-        apis.forEach((d) => {
-            if (d.name.toLowerCase() == service.toLowerCase()) {
-                Redoc.init(d.url);
+        apis.forEach((api) => {
+            if (api.name.toLowerCase() == service.toLowerCase()) {
+                Redoc.init(api.getUrlForCurrentBranch());
             }
         });
-    } else {
-        // initially render first API
-        Redoc.init(apis[0].url);
+
+        return 
     }
+    
+    // initially render first API
+    Redoc.init(apis[0].getUrlForCurrentBranch());
 }
 $(document).ready(function ($) {
 
@@ -122,7 +155,7 @@ $(document).ready(function ($) {
     var $list = document.getElementById('links_container');
     apis.forEach(function (api) {
         var $listitem = document.createElement('li');
-        $listitem.setAttribute('data-link', api.url);
+        $listitem.setAttribute('data-link', api.getUrlForCurrentBranch());
         $listitem.setAttribute('service', api.name);
         $listitem.innerText = api.name;
         $listitem.addEventListener('click', onClick);
