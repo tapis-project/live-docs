@@ -108,7 +108,7 @@ var apis = [
         urlTemplate: `https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/${BRANCH_TEMPLATE_STR}/services/deployments/spec/v1/openapi.json`,
         defaultBranch: "main"
     },
-].map((api) => Api(api.name, api.urlTemplate, api.defaultBranch));
+].map((api) => new Api(api.name, api.urlTemplate, api.defaultBranch));
 
 
 function init() {
