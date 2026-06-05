@@ -3,6 +3,7 @@
 const BRANCH_TEMPLATE_STR = "{{ branch }}"
 
 let urlParams = new URLSearchParams(location.search);
+let branchName = urlParams.get('branch');
 
 console.log({urlParams})
 
@@ -14,8 +15,7 @@ class Api {
     }
 
     getUrlForCurrentBranch = () => {
-        let branch_name = urlParams.has('branch') ? urlParams.get('branch') : this.defaultBranch;
-        this.urlTemplate.replace(BRANCH_TEMPLATE_STR, branch_name)
+        return this.urlTemplate.replace(BRANCH_TEMPLATE_STR, branchName || this.defaultBranch)
     }
 }
 
