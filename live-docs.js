@@ -4,6 +4,8 @@ const BRANCH_TEMPLATE_STR = "{{ branch }}"
 
 let urlParams = new URLSearchParams(location.search);
 
+console.log({urlParams})
+
 class Api {
     constructor(name, urlTemplate, defaultBranch) {
         this.name = name;
@@ -113,10 +115,13 @@ var apis = [
 
 
 function init() {
+    console.log("Initializing")
     let service = urlParams.get("service");
+    console.log({service})
     if (service) {
         apis.forEach((api) => {
             if (api.name.toLowerCase() == service.toLowerCase()) {
+                console.log(`${api.getUrlForCurrentBranch()}`)
                 Redoc.init(api.getUrlForCurrentBranch());
             }
         });
