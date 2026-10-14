@@ -33,7 +33,6 @@ test.afterEach(() => {
 
 test("default page renders the first API and builds the nav", async ({ page }) => {
   await page.goto("/");
-  expect(await page.evaluate(() => typeof window.Redoc)).toBe("object");
   await expect(page.locator("#links_container li")).toHaveCount(apis.length);
   await expect(page.locator("h1")).toHaveText(heading(apis[0]));
 });

@@ -4,7 +4,10 @@ import fs from "node:fs";
 import vm from "node:vm";
 
 export function loadApis() {
-  const src = fs.readFileSync(new URL("../live-docs.js", import.meta.url), "utf8");
+  const src = fs
+    .readFileSync(new URL("../live-docs.js", import.meta.url), "utf8")
+    // live-docs.js may be an ES module; drop its imports so it runs as a plain script.
+    .replace(/^import\s.*$/gm, "");
   const context = {
     location: { search: "" },
     document: {},
