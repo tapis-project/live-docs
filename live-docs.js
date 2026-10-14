@@ -101,7 +101,7 @@ var apis = [
     },
     {
         name: 'MLHub Models',
-        urlTemplate: `https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/${BRANCH_TEMPLATE_STR}/services/models/spec/v1/openapi.json`,
+        urlTemplate: `https://raw.githubusercontent.com/tapis-project/ml-hub-rust/refs/heads/${BRANCH_TEMPLATE_STR}/specs/models/openapi.json`,
         defaultBranch: "main",
     },
     {
