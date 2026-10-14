@@ -1,4 +1,5 @@
 // $(document).foundation();
+import { init as redocInit } from 'https://cdn.redoc.ly/redoc/v3.x/bundles/redoc.standalone.js';
 
 const BRANCH_TEMPLATE_STR = "{{ branch }}"
 
@@ -118,7 +119,7 @@ function init() {
         apis.forEach((api) => {
             if (api.name.toLowerCase() == service.toLowerCase()) {
                 console.log(`${api.getUrlForCurrentBranch()}`)
-                Redoc.init(api.getUrlForCurrentBranch());
+                redocInit(api.getUrlForCurrentBranch());
             }
         });
 
@@ -126,14 +127,14 @@ function init() {
     }
 
     // initially render first API
-    Redoc.init(apis[0].getUrlForCurrentBranch());
+    redocInit(apis[0].getUrlForCurrentBranch());
 }
 
 $(document).ready(function ($) {
     function onClick() {
         var url = this.getAttribute('data-link');
         let serviceName = this.getAttribute('service');
-        Redoc.init(url);
+        redocInit(url);
         var queryParams = new URLSearchParams(window.location.search);
         queryParams.set("service", serviceName);
         let hashFragment = window.location.hash;
@@ -181,7 +182,7 @@ $(document).ready(function ($) {
 
         if (beforeService !== afterService || beforeHash !== afterHash) {
             // This history logic helps a bit, but not great.
-            Redoc.init(afterService + afterHash); // Initialize with the new query parameters and hash
+            redocInit(afterService + afterHash); // Initialize with the new query parameters and hash
         }
     });
 })
