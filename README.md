@@ -22,4 +22,4 @@ npm test                          # npm run test:smoke / npm run test:spec-urls 
 - `tests/smoke.spec.mjs` loads the page in a browser with the spec fetches stubbed out. It checks that Redoc loads, the nav is built, and every `?service=` renders.
 - `tests/spec-urls.spec.mjs` checks that every upstream spec URL in `live-docs.js` still resolves.
 
-Both run in GitHub Actions (`.github/workflows/test.yml`) on PRs to `master` and on pushes to `master`.
+Both run in GitHub Actions (`.github/workflows/test.yml`) on PRs to `master` and on pushes to `master`. Pushes to `master` deploy to GitHub Pages only after the smoke test passes.

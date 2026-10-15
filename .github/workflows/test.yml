@@ -1,4 +1,4 @@
-name: Test
+name: Test and deploy
 
 on:
   pull_request:
@@ -12,7 +12,8 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # Superseded PR runs can be dropped; master runs queue so a deploy is never cut off.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   smoke:
@@ -47,3 +48,27 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:spec-urls
+
+  # Requires Settings → Pages → Source: "GitHub Actions".
+  # Gated on the smoke test only: a broken upstream spec is fetched live by the
+  # browser, so it's broken whether or not we deploy and shouldn't block other fixes.
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: smoke
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v5
